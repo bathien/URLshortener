@@ -1,0 +1,4 @@
+bin/www
+.idea/jsLibraryMappings.xml
+.idea/modules.xml
+node_modules/.bin/acorn
