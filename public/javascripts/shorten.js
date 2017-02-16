@@ -4,7 +4,7 @@
 $('.btn-shorten').on('click', function(){
 
     $.ajax({
-        url: '/api/shorten',
+        url: 'https://shortenme-1602.herokuapp.com/api/shorten',
         type: 'POST',
         dataType: 'JSON',
         data: {url: $('#url-field').val()},
