@@ -17,7 +17,7 @@ var DAOUrl = require('./DAO/DAOUrl');
 global.log			= require( "custom-logger" ).config({ level: config.CONSOLE_LOG_LEVEL });
 var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
     replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };
-var mongo_uri = process.env.PROD_MONGODB;
+var mongo_uri = process.env.PROD_MONGODB||'mongodb://thienhdb:123456@ds153609.mlab.com:53609/thienhdb';
 console.log(mongo_uri);
 //mongoose.connect('mongodb://' + config.db.host + '/' + config.db.name);
 //mongodb://<dbuser>:<dbpassword>@ds153609.mlab.com:53609/thienhdb
