@@ -15,12 +15,27 @@ var Url = require('./models/url');
 var DAOLogVisit = require('./DAO/DAOLogVisit');
 var DAOUrl = require('./DAO/DAOUrl');
 global.log			= require( "custom-logger" ).config({ level: config.CONSOLE_LOG_LEVEL });
-
+var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
+    replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };
 var mongo_uri = process.env.PROD_MONGODB;
+console.log(mongo_uri);
 //mongoose.connect('mongodb://' + config.db.host + '/' + config.db.name);
 //mongodb://<dbuser>:<dbpassword>@ds153609.mlab.com:53609/thienhdb
+mongoose.connect(mongo_uri, options);
 
-mongoose.connect(mongo_uri);
+//Add those events to get more info about mongoose connection:
+
+// Connected handler
+mongoose.connection.on('connected', function (err) {
+    console.log("Connected to DB using chain: " + mongo_uri);
+});
+
+// Error handler
+mongoose.connection.on('error', function (err) {
+    console.log(err);
+});
+
+
 global.db = mongoose.connection;
 
 var app = express();
