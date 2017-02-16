@@ -12,12 +12,11 @@ var async = require('async');
 global.test = require('assert');
 // grab the url model
 var Url = require('./models/url');
-
 var DAOLogVisit = require('./DAO/DAOLogVisit');
 var DAOUrl = require('./DAO/DAOUrl');
 global.log			= require( "custom-logger" ).config({ level: config.CONSOLE_LOG_LEVEL });
 
-var mongo_uri = ENV['PROD_MONGODB']
+var mongo_uri = process.env.PROD_MONGODB;
 //mongoose.connect('mongodb://' + config.db.host + '/' + config.db.name);
 //mongodb://<dbuser>:<dbpassword>@ds153609.mlab.com:53609/thienhdb
 
