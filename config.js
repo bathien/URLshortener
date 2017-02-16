@@ -1,7 +1,7 @@
 var config = {};
 
 config.db = {};
-//config.webhost = 'http://localhost:8888/';
+// config.webhost = 'http://localhost:5000/';
 //config.db.host = 'localhost';
 //config.db.name = 'url_shortener';
 config.webhost = 'https://shortenme-1602.herokuapp.com/';

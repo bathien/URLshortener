@@ -9,21 +9,20 @@ var bodyParser = require('body-parser');
 var config = require('./config');
 var base58 = require('./base58.js');
 var async = require('async');
+var cool = require('cool-ascii-faces');
 global.test = require('assert');
 // grab the url model
 var Url = require('./models/url');
 var DAOLogVisit = require('./DAO/DAOLogVisit');
 var DAOUrl = require('./DAO/DAOUrl');
 global.log			= require( "custom-logger" ).config({ level: config.CONSOLE_LOG_LEVEL });
+
 var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
     replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };
-var mongo_uri = process.env.PROD_MONGODB||'mongodb://thienhdb:123456@ds153609.mlab.com:53609/thienhdb';
-console.log(mongo_uri);
-//mongoose.connect('mongodb://' + config.db.host + '/' + config.db.name);
-//mongodb://<dbuser>:<dbpassword>@ds153609.mlab.com:53609/thienhdb
-mongoose.connect(mongo_uri, options);
 
-//Add those events to get more info about mongoose connection:
+var mongo_uri = 'mongodb://thienhdb:123456@ds153609.mlab.com:53609/thienhdb';
+console.log(mongo_uri);
+mongoose.connect(mongo_uri, options);
 
 // Connected handler
 mongoose.connection.on('connected', function (err) {
@@ -143,7 +142,6 @@ app.get('/:encoded_id', function(req, res){
         Url.findOne({_id: id}, function (err, doc) {
             if (err) {
                 console.log(err);
-                conn.close();
             }
             ;
 
