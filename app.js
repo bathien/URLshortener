@@ -90,7 +90,7 @@ function validateURL(textval) { //copied from   http://stackoverflow.com/questio
 
 
 
-app.post('/api/shorten', function(req, res){
+app.post('https://shortenme-1602.herokuapp.com/api/shorten', function(req, res){
     var longUrl = req.body.url;
     var isURL = validateURL(longUrl);
     var shortUrl = '';
@@ -130,7 +130,7 @@ app.post('/api/shorten', function(req, res){
 
 });
 
-app.get('/:encoded_id', function(req, res){
+app.get('https://shortenme-1602.herokuapp.com/:encoded_id', function(req, res){
 
     var base58Id = req.params.encoded_id;
 
