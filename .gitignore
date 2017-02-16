@@ -1,4 +1,5 @@
 bin/www
 .idea/jsLibraryMappings.xml
 .idea/modules.xml
-node_modules/.bin/acorn
+node_modules
+.idea/runConfigurations/bin_www.xml
