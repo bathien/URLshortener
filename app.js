@@ -88,7 +88,7 @@ function validateURL(textval) { //copied from   http://stackoverflow.com/questio
     return urlregex.test(textval);
 }
 
-app.post('https://shortenme-1602.herokuapp.com/api/shorten', function(req, res){
+app.post('/api/shorten', function(req, res){
     var longUrl = req.body.url;
     var isURL = validateURL(longUrl);
     var shortUrl = '';
@@ -127,7 +127,7 @@ app.post('https://shortenme-1602.herokuapp.com/api/shorten', function(req, res){
 
 });
 
-app.get('https://shortenme-1602.herokuapp.com/:encoded_id', function(req, res){
+app.get('/:encoded_id', function(req, res){
 
     var base58Id = req.params.encoded_id;
 
@@ -169,7 +169,7 @@ app.get('https://shortenme-1602.herokuapp.com/:encoded_id', function(req, res){
 
 });
 
-app.get( "https://shortenme-1602.herokuapp.com/stats/", function( req, res )
+app.get( "/stats/", function( req, res )
 {
     DAOUrl.getURLCount( function(err, urls )
     {
@@ -185,7 +185,7 @@ app.get( "https://shortenme-1602.herokuapp.com/stats/", function( req, res )
 /**
  * Returns stats about a specified URL in JSON format.
  */
-app.get( "https://shortenme-1602.herokuapp.com/stats/:urlCode", function( req, res )
+app.get( "/stats/:urlCode", function( req, res )
 {
     var base58Id = req.params.urlCode;
 
