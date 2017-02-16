@@ -88,38 +88,35 @@ function validateURL(textval) { //copied from   http://stackoverflow.com/questio
     return urlregex.test(textval);
 }
 
-
-
-app.post('https://shortenme-1602.herokuapp.com/api/shorten', function(req, res){
+app.post('/api/shorten', function(req, res){
     var longUrl = req.body.url;
     var isURL = validateURL(longUrl);
     var shortUrl = '';
     console.log(longUrl);
     if (isURL) {
-
-                    Url.findOne({long_url: longUrl}, function (err, doc) {
-                        if (doc) {
-                            shortUrl = config.webhost + base58.encode(doc._id);
-                            res.send({'shortUrl': shortUrl});
-                            // the document exists, so we return it without creating a new entry
-                        } else {
-                            // since it doesn't exist, let's go ahead and create it:
-                            var newUrl = Url({
-                                long_url: longUrl
-                            });
-                            console.log(longUrl);
-                            // save the new link
-                            newUrl.save(function (err) {
-                                if (err) {
-                                    console.log(err);
-                                    callback (err, null);
-                                }
-                                shortUrl = config.webhost + base58.encode(newUrl._id);
-                                console.log(shortUrl);
-                                res.send({'shortUrl': shortUrl});
-                            });
-                        }
-                    })
+        Url.findOne({long_url: longUrl}, function (err, doc) {
+            if (doc) {
+                shortUrl = config.webhost + base58.encode(doc._id);
+                res.send({'shortUrl': shortUrl});
+                // the document exists, so we return it without creating a new entry
+            } else {
+                // since it doesn't exist, let's go ahead and create it:
+                var newUrl = Url({
+                    long_url: longUrl
+                });
+                console.log(longUrl);
+                // save the new link
+                newUrl.save(function (err) {
+                    if (err) {
+                        console.log(err);
+                        callback(err, null);
+                    }
+                    shortUrl = config.webhost + base58.encode(newUrl._id);
+                    console.log(shortUrl);
+                    res.send({'shortUrl': shortUrl});
+                });
+            }
+        })
 
     }
     else{
@@ -130,7 +127,7 @@ app.post('https://shortenme-1602.herokuapp.com/api/shorten', function(req, res){
 
 });
 
-app.get('https://shortenme-1602.herokuapp.com/:encoded_id', function(req, res){
+app.get('/:encoded_id', function(req, res){
 
     var base58Id = req.params.encoded_id;
 
