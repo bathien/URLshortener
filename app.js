@@ -16,7 +16,11 @@ var DAOLogVisit = require('./DAO/DAOLogVisit');
 var DAOUrl = require('./DAO/DAOUrl');
 log			= require( "custom-logger" ).config({ level: config.CONSOLE_LOG_LEVEL });
 
-mongoose.connect('mongodb://' + config.db.host + '/' + config.db.name);
+
+//mongoose.connect('mongodb://' + config.db.host + '/' + config.db.name);
+//mongodb://<dbuser>:<dbpassword>@ds153609.mlab.com:53609/thienhdb
+
+mongoose.connect('mongodb://' + config.db.user + ':' + config.db.password + '@' + config.db.host + '/' + config.db.name);
 db = mongoose.connection;
 
 var app = express();
