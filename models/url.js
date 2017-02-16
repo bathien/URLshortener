@@ -6,10 +6,10 @@ var Schema = mongoose.Schema;
 
 var CounterSchema = Schema({
     _id: {type: String, required: true},
-    seq: { type: Number, default: 0 }
+    seq: { type: Number, default: 9999 }
 });
 
-var counter = mongoose.model('counter', CounterSchema);
+var counter = mongoose.model('counters', CounterSchema);
 // create a schema for our links
 var urlSchema = new Schema({
     _id: {type: Number, index: true},
@@ -30,6 +30,6 @@ urlSchema.pre('save', function(next){
 
 
 
-var Url = mongoose.model('Url', urlSchema);
+var Url = mongoose.model('urls', urlSchema);
 
 module.exports = Url;

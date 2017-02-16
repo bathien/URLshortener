@@ -1,3 +1,4 @@
+'use strict'
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -8,20 +9,20 @@ var bodyParser = require('body-parser');
 var config = require('./config');
 var base58 = require('./base58.js');
 var async = require('async');
-test = require('assert');
+global.test = require('assert');
 // grab the url model
 var Url = require('./models/url');
 
 var DAOLogVisit = require('./DAO/DAOLogVisit');
 var DAOUrl = require('./DAO/DAOUrl');
-log			= require( "custom-logger" ).config({ level: config.CONSOLE_LOG_LEVEL });
+global.log			= require( "custom-logger" ).config({ level: config.CONSOLE_LOG_LEVEL });
 
-
+var mongo_uri = ENV['PROD_MONGODB']
 //mongoose.connect('mongodb://' + config.db.host + '/' + config.db.name);
 //mongodb://<dbuser>:<dbpassword>@ds153609.mlab.com:53609/thienhdb
 
-mongoose.connect('mongodb://' + config.db.user + ':' + config.db.password + '@' + config.db.host + '/' + config.db.name);
-db = mongoose.connection;
+mongoose.connect(mongo_uri);
+global.db = mongoose.connection;
 
 var app = express();
 
@@ -146,7 +147,7 @@ app.get('/:encoded_id', function(req, res){
                 var message = "Error 404: This URL does not redirect to anything.";
 
                 // send error message to browser
-                res.send(status, message);
+                res.status(status).send( message);
 
                 // log visitor data into database
                 DAOLogVisit.logVisit(id, status, req);
@@ -221,7 +222,7 @@ app.use(function(err, req, res, next) {
 
 
 
-var server = app.listen(8080, function(){
-    console.log('Server listening on port 8080');
+var server = app.listen(8888, function(){
+    console.log('Server listening on port 8888');
 });
 module.exports = app;
