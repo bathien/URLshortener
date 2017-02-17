@@ -4,6 +4,18 @@
 
 var mongoose = require('mongoose');
 var collection = "urls";
+
+module.exports.getLongUrl = function(id, callback ) {
+    db.collection(collection).findOne({_id: id}, function (err, doc) {
+        if (err) {
+            console.log(err, null);
+        }
+        ;
+        callback(null, doc);
+
+
+    });
+}
 /**
  * Retrieves the current number of URLs from the database.
  *

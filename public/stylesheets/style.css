@@ -8,6 +8,13 @@ body {
   background-color: #4791D2;
 }
 
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+div{
+  padding-bottom: 30px;
+}
 body {
   color: #fff;
   text-align: center;

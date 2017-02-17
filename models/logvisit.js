@@ -10,7 +10,7 @@ var LogVisitSchema = Schema({
     ip_address: String,
     referral: String,
     user_agent: String,
-    created_at: Date
+    created_at:Date
 });
 
 var LogVisit = mongoose.model('LogVisits', LogVisitSchema);
